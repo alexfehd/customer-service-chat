@@ -3,6 +3,7 @@ package com.alexfehd.customerservicechat.controller;
 import com.alexfehd.customerservicechat.entity.User;
 import com.alexfehd.customerservicechat.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class UserController {
 
     private final UserService userService;
@@ -24,6 +26,7 @@ public class UserController {
     public User addUser(
             @Payload User user
     ) {
+        log.info("Adding user: " + user);
         userService.saveUser(user);
         return user;
     }
@@ -36,8 +39,6 @@ public class UserController {
         userService.disconnect(user);
         return user;
     }
-
-
 
 
 }
